@@ -14,6 +14,8 @@ class CityListViewController: UIViewController {
     var citiesTableList: UITableView?
     var cellIdendifier: String = "CityCell"
     var cities = [CityObject]()
+    var viewModel: CityListViewModel = CityListViewModel()
+    
     
     override func loadView() {
         super.loadView()
@@ -39,6 +41,8 @@ class CityListViewController: UIViewController {
         let cityListView = CityListView(frame: CGRect.zero)
         self.view = cityListView
         
+        //viewModel = CityListViewModel()
+        
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
         self.navigationItem.searchController = search
@@ -46,6 +50,19 @@ class CityListViewController: UIViewController {
         citiesTableList =  self.view.viewWithTag(1) as! UITableView?
         citiesTableList?.register(CityTableViewCell.self, forCellReuseIdentifier: cellIdendifier)
         citiesTableList?.tableFooterView = UIView()
+        citiesTableList?.delegate = self
+        citiesTableList?.dataSource = self
+        
+        viewModel.shouldReloadTableCallback = {[weak self] (shouldReload) in
+            if shouldReload {
+                DispatchQueue.main.async {
+                   self?.citiesTableList?.reloadData()
+                }
+                
+            }
+        }
+        
+        viewModel.loadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,7 +94,7 @@ extension CityListViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cities.count
+        return viewModel.numberOfRowsInSection()
     }
     
     
@@ -89,10 +106,10 @@ extension CityListViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdendifier, for: indexPath as IndexPath) as! CityTableViewCell
         
-        let rowDictionary = cities[indexPath.row]
+        let rowDictionary = viewModel.cityArray[indexPath.row]
         
-        let cityName = rowDictionary.name //rowDictionary.value(forKey: "name")
-        let countryName = rowDictionary.country // rowDictionary.value(forKey: "country")
+        let cityName = rowDictionary.name
+        let countryName = rowDictionary.country
         
         
         cell.cityLabel.text = cityName
@@ -109,11 +126,10 @@ extension CityListViewController: UITableViewDelegate{
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let rowDictionary = cities[indexPath.row]
+        let rowDictionary = viewModel.cityArray[indexPath.row]
         
-        //get selected city details
         let cityName = rowDictionary.name
-        let countryName = rowDictionary.country 
+        let countryName = rowDictionary.country
         
         let coordinates = rowDictionary.coordinates
         let latitude = coordinates.value(forKey: "lat")

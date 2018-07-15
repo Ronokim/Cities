@@ -25,4 +25,14 @@ extension CityObject{
         self.country = json["country"] as! String
         self.coordinates = json["coord"] as! NSDictionary
     }
+    
+    public static func modelsFromArray(array:[[String:Any]]) -> [CityObject]
+    {
+        var models:[CityObject] = []
+        for item in array
+        {
+            models.append(CityObject.init(json: item))
+        }
+        return models
+    }
 }
