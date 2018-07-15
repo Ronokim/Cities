@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		D24A360D20FBD446008AC1AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A360C20FBD446008AC1AC /* AppDelegate.swift */; };
-		D24A360F20FBD446008AC1AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A360E20FBD446008AC1AC /* ViewController.swift */; };
-		D24A361220FBD446008AC1AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24A361020FBD446008AC1AC /* Main.storyboard */; };
 		D24A361420FBD458008AC1AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D24A361320FBD458008AC1AC /* Assets.xcassets */; };
 		D24A361720FBD458008AC1AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24A361520FBD458008AC1AC /* LaunchScreen.storyboard */; };
 		D24A362220FBD459008AC1AC /* CitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A362120FBD459008AC1AC /* CitiesTests.swift */; };
+		D24A363520FBF583008AC1AC /* CityListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A363420FBF583008AC1AC /* CityListView.swift */; };
+		D24A363720FBF59A008AC1AC /* CityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A363620FBF59A008AC1AC /* CityListViewController.swift */; };
+		D24A363920FBF806008AC1AC /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A363820FBF806008AC1AC /* CityTableViewCell.swift */; };
+		D24A363B20FBFABD008AC1AC /* CityObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A363A20FBFABD008AC1AC /* CityObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,14 +30,16 @@
 /* Begin PBXFileReference section */
 		D24A360920FBD446008AC1AC /* Cities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24A360C20FBD446008AC1AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D24A360E20FBD446008AC1AC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D24A361120FBD446008AC1AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D24A361320FBD458008AC1AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D24A361620FBD458008AC1AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D24A361820FBD458008AC1AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D24A361D20FBD459008AC1AC /* CitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CitiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24A362120FBD459008AC1AC /* CitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesTests.swift; sourceTree = "<group>"; };
 		D24A362320FBD459008AC1AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D24A363420FBF583008AC1AC /* CityListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListView.swift; sourceTree = "<group>"; };
+		D24A363620FBF59A008AC1AC /* CityListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListViewController.swift; sourceTree = "<group>"; };
+		D24A363820FBF806008AC1AC /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
+		D24A363A20FBFABD008AC1AC /* CityObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +81,9 @@
 		D24A360B20FBD446008AC1AC /* Cities */ = {
 			isa = PBXGroup;
 			children = (
+				D24A363120FBF54F008AC1AC /* Views */,
+				D24A362C20FBD513008AC1AC /* Models */,
 				D24A360C20FBD446008AC1AC /* AppDelegate.swift */,
-				D24A360E20FBD446008AC1AC /* ViewController.swift */,
-				D24A361020FBD446008AC1AC /* Main.storyboard */,
 				D24A361320FBD458008AC1AC /* Assets.xcassets */,
 				D24A361520FBD458008AC1AC /* LaunchScreen.storyboard */,
 				D24A361820FBD458008AC1AC /* Info.plist */,
@@ -94,6 +98,40 @@
 				D24A362320FBD459008AC1AC /* Info.plist */,
 			);
 			path = CitiesTests;
+			sourceTree = "<group>";
+		};
+		D24A362C20FBD513008AC1AC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D24A363A20FBFABD008AC1AC /* CityObject.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D24A363120FBF54F008AC1AC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D24A363320FBF560008AC1AC /* ViewControllers */,
+				D24A363220FBF557008AC1AC /* Views */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D24A363220FBF557008AC1AC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D24A363420FBF583008AC1AC /* CityListView.swift */,
+				D24A363820FBF806008AC1AC /* CityTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D24A363320FBF560008AC1AC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D24A363620FBF59A008AC1AC /* CityListViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,7 +217,6 @@
 			files = (
 				D24A361720FBD458008AC1AC /* LaunchScreen.storyboard in Resources */,
 				D24A361420FBD458008AC1AC /* Assets.xcassets in Resources */,
-				D24A361220FBD446008AC1AC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,8 +234,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D24A360F20FBD446008AC1AC /* ViewController.swift in Sources */,
 				D24A360D20FBD446008AC1AC /* AppDelegate.swift in Sources */,
+				D24A363520FBF583008AC1AC /* CityListView.swift in Sources */,
+				D24A363B20FBFABD008AC1AC /* CityObject.swift in Sources */,
+				D24A363920FBF806008AC1AC /* CityTableViewCell.swift in Sources */,
+				D24A363720FBF59A008AC1AC /* CityListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,14 +261,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D24A361020FBD446008AC1AC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D24A361120FBD446008AC1AC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D24A361520FBD458008AC1AC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -358,6 +390,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = USYKGM4A2R;
 				INFOPLIST_FILE = Cities/Info.plist;
@@ -365,8 +398,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.Cities;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ronald.Cities;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -376,6 +410,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = USYKGM4A2R;
 				INFOPLIST_FILE = Cities/Info.plist;
@@ -383,8 +418,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.Cities;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ronald.Cities;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -12,10 +12,33 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var navigationController : UINavigationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let frame = UIScreen.main.bounds
+        window = UIWindow(frame: frame)
+        
+        let rootController = CityListViewController()
+        navigationController = UINavigationController(rootViewController: rootController)
+        
+        if let window = self.window{
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
+            //navigationController.setNavigationBarHidden(true, animated: false)
+            
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.backgroundColor = UIColor.white
+            navigationController?.navigationBar.tintColor = UIColor.white
+            
+            UINavigationBar.appearance().tintColor = UIColor.blue
+            UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.black]
+            
+        }
+        
+        UIApplication.shared.statusBarStyle = .default
+        
         return true
     }
 
