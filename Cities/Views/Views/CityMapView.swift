@@ -7,15 +7,27 @@
 //
 
 import UIKit
+import MapKit
 
 class CityMapView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    let screenSize: CGRect = UIScreen.main.bounds
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.addCustomView()
     }
-    */
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addCustomView() {
+        self.backgroundColor = UIColor.darkGray
+        
+        let mapContainer: MKMapView = MKMapView.init(frame: CGRect.zero)
+        mapContainer.tag = 1
+        self.addSubview(mapContainer)
+    }
 
 }

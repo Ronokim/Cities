@@ -35,6 +35,7 @@ class CityTableViewCell: UITableViewCell {
         icon.backgroundColor = UIColor.clear
         icon.clipsToBounds = true
         icon.tintColor = .black
+        //icon.image = UIImage(named: "ic_apple_map_black")
         
         cityLabel.frame = CGRect(x: 20 , y: 10, width: self.bounds.width - 60, height: 20)
         cityLabel.textColor = UIColor.black

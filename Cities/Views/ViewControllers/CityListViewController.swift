@@ -9,12 +9,12 @@
 import UIKit
 
 class CityListViewController: UIViewController {
-
-//    var cityListView: CityListView = CityListView()
+    
+    //    var cityListView: CityListView = CityListView()
     var citiesTableList: UITableView?
     var cellIdendifier: String = "CityCell"
     var activityIndicator : CityActivityIndicatorView? = nil
-
+    
     //var cities = [CityObject]()
     var viewModel: CityListViewModel = CityListViewModel()
     var searchString: String?
@@ -63,11 +63,21 @@ class CityListViewController: UIViewController {
         viewModel.shouldReloadTableCallback = {[weak self] (shouldReload) in
             if shouldReload {
                 DispatchQueue.main.async {
-                   self?.citiesTableList?.reloadData()
+                    self?.citiesTableList?.reloadData()
                 }
                 
             }
         }
+        
+        
+        //        viewModel.setCurrentSearchTextCallback = {[weak self] (currentSearchText) in
+        //            if (currentSearchText?.count)! > 0 {
+        //                DispatchQueue.main.async {
+        //                    self?.navigationItem.searchController?.searchBar.text = currentSearchText
+        //                }
+        //
+        //            }
+        //        }
         
         viewModel.showActivityIndicatorCallback = { [weak self] (showActivity) in
             DispatchQueue.main.async {
@@ -82,7 +92,7 @@ class CityListViewController: UIViewController {
         
         viewModel.loadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -101,7 +111,7 @@ class CityListViewController: UIViewController {
             navigationItem.hidesSearchBarWhenScrolling = true
         }
     }
-
+    
 }
 
 
@@ -141,7 +151,7 @@ extension CityListViewController: UITableViewDataSource{
 
 //MARK: - UITableViewDelegate methods
 extension CityListViewController: UITableViewDelegate{
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let rowDictionary = viewModel.cityArray[indexPath.row]
@@ -156,10 +166,11 @@ extension CityListViewController: UITableViewDelegate{
         print("Selected city \(String(describing: cityName)),\(countryName) - Coords: \(String(describing: latitude)),\(String(describing: longitude))")
         
         
-        //        let controller: CityMapViewController = CityMapViewController()
-        //        controller.latitude = latitude
-        //        controller.longitude = longitude
-        //        self.navigationController?.pushViewController(controller, animated: true)
+        let controller: CityMapViewController = CityMapViewController()
+        controller.latitude = latitude as? Double
+        controller.longitude = longitude as? Double
+        controller.cityName = cityName
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
 
@@ -170,10 +181,11 @@ extension CityListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text, !text.isEmpty {
             viewModel.searchCity(searchText: text)
-            searchString = text
+            self.searchString = text
         }
         else {
-           //searchString = ""
+            searchString = ""
+            viewModel.searchCity(searchText: searchString!)
         }
     }
     
@@ -184,10 +196,12 @@ extension CityListViewController: UISearchResultsUpdating {
 extension CityListViewController: UISearchControllerDelegate {
     func didDismissSearchController(_ searchController: UISearchController) {
         searchController.searchBar.text = self.searchString
+        print("didDismissSearchController")
     }
     
     func didPresentSearchController(_ searchController: UISearchController) {
         searchController.searchBar.text = self.searchString
+        print("didPresentSearchController")
     }
     
 }
@@ -197,17 +211,21 @@ extension CityListViewController: UISearchControllerDelegate {
 extension CityListViewController: UISearchBarDelegate{
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchWasCancelled = false
+        print("searchBarTextDidBeginEditing")
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchWasCancelled = true
+        print("searchBarCancelButtonClicked")
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print("searchBarTextDidEndEditing")
         if searchWasCancelled {
-            searchBar.text = self.searchString
+            //searchBar.text = self.searchString
         } else {
-            searchString = searchBar.text
+            //self.searchString = searchBar.text
+            self.navigationItem.searchController?.searchBar.text = self.searchString
         }
     }
 }

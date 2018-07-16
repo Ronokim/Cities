@@ -33,9 +33,15 @@ struct CityListViewModel {
     //MARK: - callBack method to reload UITableView
     var showActivityIndicatorCallback : ((_ isLoading: Bool) -> Void)?
     
-    init() {
-        
+    
+    var currentSearchText: String? = "" {
+        didSet { setCurrentSearchTextCallback?(currentSearchText)
+        }
     }
+    
+    var setCurrentSearchTextCallback : ((_ searchText: String?) -> Void)?
+    
+    init() {}
     
     
     public mutating func loadData() {
@@ -70,13 +76,13 @@ struct CityListViewModel {
     
     
     mutating func searchCity(searchText: String){
-        var filteredCityArray = [CityObject]()
-        filteredCityArray = defaultCityArray.filter({ (key) -> Bool in
+        //Filter using higher order function filter based on prefix = searchText
+        cityArray = defaultCityArray.filter({ (key) -> Bool in
             key.name.localizedLowercase.hasPrefix(searchText.localizedLowercase) 
         })
-        cityArray = filteredCityArray
+        currentSearchText = searchText
+        //reload UITableView with new filtered data
         shouldReloadTable = true
-        //return filteredCityArray
     }
     
 }

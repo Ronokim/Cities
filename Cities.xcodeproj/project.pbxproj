@@ -137,10 +137,10 @@
 		D24A363220FBF557008AC1AC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D24A363420FBF583008AC1AC /* CityListView.swift */,
-				D24A363820FBF806008AC1AC /* CityTableViewCell.swift */,
 				D24A364420FC171B008AC1AC /* CityActivityIndicatorView.swift */,
+				D24A363420FBF583008AC1AC /* CityListView.swift */,
 				D24A364820FD1F70008AC1AC /* CityMapView.swift */,
+				D24A363820FBF806008AC1AC /* CityTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
