@@ -13,9 +13,12 @@ class CityListViewController: UIViewController {
 //    var cityListView: CityListView = CityListView()
     var citiesTableList: UITableView?
     var cellIdendifier: String = "CityCell"
-    var cities = [CityObject]()
+    var activityIndicator : CityActivityIndicatorView? = nil
+
+    //var cities = [CityObject]()
     var viewModel: CityListViewModel = CityListViewModel()
-    
+    var searchString: String?
+    var searchWasCancelled = false
     
     override func loadView() {
         super.loadView()
@@ -45,6 +48,8 @@ class CityListViewController: UIViewController {
         
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
+        search.delegate = self
+        search.searchBar.delegate = self
         self.navigationItem.searchController = search
         
         citiesTableList =  self.view.viewWithTag(1) as! UITableView?
@@ -52,6 +57,8 @@ class CityListViewController: UIViewController {
         citiesTableList?.tableFooterView = UIView()
         citiesTableList?.delegate = self
         citiesTableList?.dataSource = self
+        
+        activityIndicator = CityActivityIndicatorView(frame: CGRect.zero)
         
         viewModel.shouldReloadTableCallback = {[weak self] (shouldReload) in
             if shouldReload {
@@ -61,6 +68,17 @@ class CityListViewController: UIViewController {
                 
             }
         }
+        
+        viewModel.showActivityIndicatorCallback = { [weak self] (showActivity) in
+            DispatchQueue.main.async {
+                if showActivity {
+                    self?.view.addSubview((self?.activityIndicator!)!)
+                }else {
+                    self?.activityIndicator?.removeFromSuperview()
+                }
+            }
+        }
+        
         
         viewModel.loadData()
     }
@@ -148,9 +166,48 @@ extension CityListViewController: UITableViewDelegate{
 
 //MARK: - UISearchResultsUpdating methods
 extension CityListViewController: UISearchResultsUpdating {
+    
     func updateSearchResults(for searchController: UISearchController) {
-
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            viewModel.searchCity(searchText: text)
+            searchString = text
+        }
+        else {
+           //searchString = ""
+        }
     }
+    
 }
 
 
+//MARK: - UISearchController delegate methods
+extension CityListViewController: UISearchControllerDelegate {
+    func didDismissSearchController(_ searchController: UISearchController) {
+        searchController.searchBar.text = self.searchString
+    }
+    
+    func didPresentSearchController(_ searchController: UISearchController) {
+        searchController.searchBar.text = self.searchString
+    }
+    
+}
+
+
+//MARK: - UISearchBarDelegate delegate methods
+extension CityListViewController: UISearchBarDelegate{
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchWasCancelled = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchWasCancelled = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if searchWasCancelled {
+            searchBar.text = self.searchString
+        } else {
+            searchString = searchBar.text
+        }
+    }
+}

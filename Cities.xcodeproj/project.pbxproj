@@ -17,6 +17,10 @@
 		D24A363B20FBFABD008AC1AC /* CityObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A363A20FBFABD008AC1AC /* CityObject.swift */; };
 		D24A363E20FC0354008AC1AC /* CityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A363D20FC0354008AC1AC /* CityListViewModel.swift */; };
 		D24A364120FC0FFD008AC1AC /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = D24A364020FC0FFD008AC1AC /* cities.json */; };
+		D24A364320FC1274008AC1AC /* CityListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A364220FC1274008AC1AC /* CityListViewModelTests.swift */; };
+		D24A364520FC171B008AC1AC /* CityActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A364420FC171B008AC1AC /* CityActivityIndicatorView.swift */; };
+		D24A364620FCC4ED008AC1AC /* CityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A363D20FC0354008AC1AC /* CityListViewModel.swift */; };
+		D24A364720FCC4F3008AC1AC /* CityObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A363A20FBFABD008AC1AC /* CityObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,8 @@
 		D24A363A20FBFABD008AC1AC /* CityObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityObject.swift; sourceTree = "<group>"; };
 		D24A363D20FC0354008AC1AC /* CityListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListViewModel.swift; sourceTree = "<group>"; };
 		D24A364020FC0FFD008AC1AC /* cities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cities.json; sourceTree = "<group>"; };
+		D24A364220FC1274008AC1AC /* CityListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListViewModelTests.swift; sourceTree = "<group>"; };
+		D24A364420FC171B008AC1AC /* CityActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityActivityIndicatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,7 @@
 			children = (
 				D24A362120FBD459008AC1AC /* CitiesTests.swift */,
 				D24A362320FBD459008AC1AC /* Info.plist */,
+				D24A364220FC1274008AC1AC /* CityListViewModelTests.swift */,
 			);
 			path = CitiesTests;
 			sourceTree = "<group>";
@@ -128,6 +135,7 @@
 			children = (
 				D24A363420FBF583008AC1AC /* CityListView.swift */,
 				D24A363820FBF806008AC1AC /* CityTableViewCell.swift */,
+				D24A364420FC171B008AC1AC /* CityActivityIndicatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -263,6 +271,7 @@
 				D24A363E20FC0354008AC1AC /* CityListViewModel.swift in Sources */,
 				D24A363920FBF806008AC1AC /* CityTableViewCell.swift in Sources */,
 				D24A363720FBF59A008AC1AC /* CityListViewController.swift in Sources */,
+				D24A364520FC171B008AC1AC /* CityActivityIndicatorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +279,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D24A364620FCC4ED008AC1AC /* CityListViewModel.swift in Sources */,
 				D24A362220FBD459008AC1AC /* CitiesTests.swift in Sources */,
+				D24A364320FC1274008AC1AC /* CityListViewModelTests.swift in Sources */,
+				D24A364720FCC4F3008AC1AC /* CityObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
