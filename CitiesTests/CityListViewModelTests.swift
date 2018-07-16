@@ -17,6 +17,7 @@ class CityListViewModelTests: XCTestCase {
     var city3: CityObject?
     var city4: CityObject?
     var city5: CityObject?
+    var city6: CityObject?
     
     override func setUp() {
         super.setUp()
@@ -27,7 +28,9 @@ class CityListViewModelTests: XCTestCase {
         city3 = CityObject(id: 5323810, name: "Anaheim,", country: "US", coordinates: ["lon":-117.914497,"lat":33.835289])
         city4 = CityObject(id: 5551752, name: "Arizona", country: "US", coordinates: ["lon":-111.500977,"lat":34.500301])
         city5 = CityObject(id: 2147714, name: "Sydney", country: "AU", coordinates: ["lon":151.207321,"lat":-33.867851])
-        cityArray = [city1, city2, city3, city4, city5] as! [CityObject];
+        city6 = CityObject(id: 2147714, name: "neySyd", country: "AU", coordinates: ["lon":151.207321,"lat":-33.867851])
+        cityArray = [city1, city2, city3, city4, city5, city6] as! [CityObject];
+        cityListViewModel.defaultCityArray = cityArray
         cityListViewModel.cityArray = cityArray
     }
     
@@ -42,7 +45,7 @@ class CityListViewModelTests: XCTestCase {
         let expectedFilteredArray = [city5] as! [CityObject]
         let expectedCityName = "Sydney"
         
-        cityListViewModel.searchCity(searchText: "S")
+        cityListViewModel.searchCity(searchText: "Syd")
         let filteredArray = cityListViewModel.cityArray
         
         XCTAssertEqual(filteredArray[0].name, expectedFilteredArray[0].name , "Search city failed")
@@ -55,7 +58,7 @@ class CityListViewModelTests: XCTestCase {
         cityListViewModel.searchCity(searchText: "S")
         let filteredArray = cityListViewModel.cityArray
         
-        XCTAssertFalse(filteredArray[0].name == "Sydneye", "Negative Search city failed")
+        XCTAssertFalse(filteredArray[0].name == "neySyd", "Negative Search city failed")
     }
     
     

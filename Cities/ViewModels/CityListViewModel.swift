@@ -72,8 +72,7 @@ struct CityListViewModel {
     mutating func searchCity(searchText: String){
         var filteredCityArray = [CityObject]()
         filteredCityArray = defaultCityArray.filter({ (key) -> Bool in
-            //key.name.containsIgnoringCase(find: searchText)
-            key.name.lowercased().contains(searchText.lowercased())
+            key.name.localizedLowercase.hasPrefix(searchText.localizedLowercase) 
         })
         cityArray = filteredCityArray
         shouldReloadTable = true
