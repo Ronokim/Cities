@@ -54,6 +54,7 @@ struct CityListViewModel {
                 let jsonResult = try JSONSerialization.jsonObject(with: data as Data, options: .mutableLeaves)
                 
                 defaultCityArray = CityObject.modelsFromArray(array: jsonResult as! [[String : Any]])
+                defaultCityArray = self.sortCity()
                 cityArray = defaultCityArray
                 shouldReloadTable = true
                 isLoading = false
@@ -83,6 +84,16 @@ struct CityListViewModel {
         currentSearchText = searchText
         //reload UITableView with new filtered data
         shouldReloadTable = true
+    }
+    
+    
+    mutating func sortCity() -> [CityObject]{
+        //return defaultCityArray.sorted { (initial, next) -> Bool in
+          //             return initial.name.compare(next.name) == .orderedAscending
+            //      }
+        
+       
+        return defaultCityArray.sorted(by: { $0.name.localizedLowercase < $1.name.localizedLowercase })
     }
     
 }

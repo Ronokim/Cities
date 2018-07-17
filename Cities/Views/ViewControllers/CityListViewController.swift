@@ -157,13 +157,11 @@ extension CityListViewController: UITableViewDelegate{
         let rowDictionary = viewModel.cityArray[indexPath.row]
         
         let cityName = rowDictionary.name
-        let countryName = rowDictionary.country
+        //let countryName = rowDictionary.country
         
         let coordinates = rowDictionary.coordinates
         let latitude = coordinates.value(forKey: "lat")
         let longitude = coordinates.value(forKey: "lon")
-        
-        print("Selected city \(String(describing: cityName)),\(countryName) - Coords: \(String(describing: latitude)),\(String(describing: longitude))")
         
         
         let controller: CityMapViewController = CityMapViewController()
