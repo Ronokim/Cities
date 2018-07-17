@@ -48,6 +48,7 @@ struct CityListViewModel {
         if let path =  Bundle.main.path(forResource: "cities", ofType: "json") {
             isLoading = true
             do {
+                
                 //let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options:.alwaysMapped)
                 
@@ -82,17 +83,13 @@ struct CityListViewModel {
             key.name.localizedLowercase.hasPrefix(searchText.localizedLowercase) 
         })
         currentSearchText = searchText
+        
         //reload UITableView with new filtered data
         shouldReloadTable = true
     }
     
     
     mutating func sortCity() -> [CityObject]{
-        //return defaultCityArray.sorted { (initial, next) -> Bool in
-          //             return initial.name.compare(next.name) == .orderedAscending
-            //      }
-        
-       
         return defaultCityArray.sorted(by: { $0.name.localizedLowercase < $1.name.localizedLowercase })
     }
     

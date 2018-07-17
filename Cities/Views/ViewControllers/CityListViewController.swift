@@ -10,12 +10,10 @@ import UIKit
 
 class CityListViewController: UIViewController {
     
-    //    var cityListView: CityListView = CityListView()
     var citiesTableList: UITableView?
     var cellIdendifier: String = "CityCell"
     var activityIndicator : CityActivityIndicatorView? = nil
     
-    //var cities = [CityObject]()
     var viewModel: CityListViewModel = CityListViewModel()
     var searchString: String?
     var searchWasCancelled = false
@@ -38,17 +36,12 @@ class CityListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //cityListView = CityListView(frame: CGRect.zero)
-        //cityListView.addCustomView()
         
         let cityListView = CityListView(frame: CGRect.zero)
         self.view = cityListView
         
-        //viewModel = CityListViewModel()
-        
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
-        search.delegate = self
         search.searchBar.delegate = self
         self.navigationItem.searchController = search
         
@@ -57,6 +50,10 @@ class CityListViewController: UIViewController {
         citiesTableList?.tableFooterView = UIView()
         citiesTableList?.delegate = self
         citiesTableList?.dataSource = self
+        
+        
+        let scrollButton: UIButton = (self.view.viewWithTag(2) as! UIButton?)!
+        scrollButton.addTarget(self, action:#selector(buttonListener(sender:)), for: UIControlEvents.touchUpInside)
         
         activityIndicator = CityActivityIndicatorView(frame: CGRect.zero)
         
@@ -70,15 +67,6 @@ class CityListViewController: UIViewController {
         }
         
         
-        //        viewModel.setCurrentSearchTextCallback = {[weak self] (currentSearchText) in
-        //            if (currentSearchText?.count)! > 0 {
-        //                DispatchQueue.main.async {
-        //                    self?.navigationItem.searchController?.searchBar.text = currentSearchText
-        //                }
-        //
-        //            }
-        //        }
-        
         viewModel.showActivityIndicatorCallback = { [weak self] (showActivity) in
             DispatchQueue.main.async {
                 if showActivity {
@@ -89,8 +77,10 @@ class CityListViewController: UIViewController {
             }
         }
         
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.viewModel.loadData()
+        }
         
-        viewModel.loadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -110,6 +100,12 @@ class CityListViewController: UIViewController {
         if #available(iOS 11.0, *) {
             navigationItem.hidesSearchBarWhenScrolling = true
         }
+    }
+    
+    
+    //MARK: - button listener method
+    @objc func buttonListener(sender:UIButton) {
+        citiesTableList?.setContentOffset(.zero, animated: true)
     }
     
 }
@@ -178,28 +174,18 @@ extension CityListViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text, !text.isEmpty {
-            viewModel.searchCity(searchText: text)
+            DispatchQueue.global(qos: .userInteractive).async {
+                self.viewModel.searchCity(searchText: text)
+            }
             self.searchString = text
         }
         else {
             searchString = ""
-            viewModel.searchCity(searchText: searchString!)
+            DispatchQueue.global(qos: .userInteractive).async {
+                self.viewModel.searchCity(searchText: self.searchString!)
+            }
+            
         }
-    }
-    
-}
-
-
-//MARK: - UISearchController delegate methods
-extension CityListViewController: UISearchControllerDelegate {
-    func didDismissSearchController(_ searchController: UISearchController) {
-        searchController.searchBar.text = self.searchString
-        print("didDismissSearchController")
-    }
-    
-    func didPresentSearchController(_ searchController: UISearchController) {
-        searchController.searchBar.text = self.searchString
-        print("didPresentSearchController")
     }
     
 }

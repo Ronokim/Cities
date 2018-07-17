@@ -37,6 +37,16 @@ class CityListView: UIView {
         self.addSubview(tableView)
         
         
+        let scrollButton : UIButton = UIButton(frame : CGRect(x : screenWidth - 70, y : screenHeight - 100, width: 50, height : 50))
+        scrollButton.backgroundColor = UIColor.white
+        scrollButton.setImage(UIImage(named: "ic_hand_up_black"), for: .normal)
+        scrollButton.layer.cornerRadius = 25
+        scrollButton.layer.shadowRadius = 2
+        scrollButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        scrollButton.layer.shadowOpacity = 0.8
+        scrollButton.tag = 2
+        self.addSubview(scrollButton)
+        
     }
     
 }
