@@ -9,9 +9,7 @@
 import UIKit
 import MapKit
 
-class CityMapView: UIView {
-
-    let screenSize: CGRect = UIScreen.main.bounds
+final class CityMapView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +25,6 @@ class CityMapView: UIView {
         
         let mapContainer: MKMapView = MKMapView.init(frame: CGRect.zero)
         mapContainer.tag = 1
-        self.addSubview(mapContainer)
+        addSubview(mapContainer)
     }
-
 }

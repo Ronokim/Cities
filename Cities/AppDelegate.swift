@@ -26,18 +26,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let window = self.window{
             window.rootViewController = navigationController
             window.makeKeyAndVisible()
-            //navigationController.setNavigationBarHidden(true, animated: false)
+
+            window.backgroundColor = .white
             
             navigationController?.navigationBar.isTranslucent = false
             navigationController?.navigationBar.backgroundColor = UIColor.white
             navigationController?.navigationBar.tintColor = UIColor.white
             
-            UINavigationBar.appearance().tintColor = UIColor.blue
             UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.black]
             
         }
-        
-        UIApplication.shared.statusBarStyle = .default
         
         return true
     }

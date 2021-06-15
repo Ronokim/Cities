@@ -9,37 +9,33 @@
 import UIKit
 import MapKit
 
-class CityMapViewController: UIViewController {
-    var mapContainer: MKMapView? = nil
-    var cityMapView: CityMapView? = nil
-    var cityName: String?
-    var latitude: Double?
-    var longitude: Double?
-    var locationCoord : CLLocationCoordinate2D?
-    let annotation = MKPointAnnotation()
-    
-    override func loadView()  {
-        super.loadView()
-        
-        self.title = cityName ?? "Cities"
-        self.navigationController?.navigationBar.tintColor = UIColor.black
-        self.navigationController?.navigationBar.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationController?.navigationItem.largeTitleDisplayMode = .never
-        UINavigationBar.appearance().tintColor = UIColor.blue
-        
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
-        cityMapView = CityMapView(frame: CGRect.zero)
-        
+final class CityMapViewController: BaseViewController<CityMapView> {
+    private var mapContainer: MKMapView? = nil
+    private var cityName: String?
+    private var latitude: Double?
+    private var longitude: Double?
+    private var locationCoord : CLLocationCoordinate2D?
+    private let annotation = MKPointAnnotation()
+
+    init(with cityObject: CityObject) {
+        super.init(nibName: nil, bundle: nil)
+        self.cityName = cityObject.name
+        self.latitude = cityObject.coord.lat
+        self.longitude = cityObject.coord.lon
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 
-        self.view = cityMapView
-        
+    override func setupBehaviours() {
+        self.title = cityName ?? "City"
+                
         mapContainer = self.view.viewWithTag(1) as? MKMapView
         mapContainer?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
@@ -52,13 +48,5 @@ class CityMapViewController: UIViewController {
             annotation.coordinate = locationCoord!
             mapContainer?.addAnnotation(annotation)
         }
-        
-        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }

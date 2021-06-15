@@ -8,45 +8,48 @@
 
 import UIKit
 
-class CityListView: UIView {
+final class CityListView: BaseView {
 
-    var scrollView :UIScrollView = UIScrollView()
-    let screenSize: CGRect = UIScreen.main.bounds
+    private var citiesTableView : UITableView = UITableView().layoutable()
+    private var scrollButton : UIButton = UIButton().layoutable()
+    private let scrollButtonWidth: CGFloat = 50.0
+    private let scrollButtonHeight:CGFloat = 50.0
+    private let scrollButtonTrailingOffset:CGFloat = -50.0
+    private let scrollButtonBottomOffset:CGFloat = -50.0
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.addCustomView()
+    ///  layout items in the view
+    override func setupViewHierarchy() {
+        addSubviews([citiesTableView, scrollButton])
     }
     
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func addCustomView() {
+    ///  add properties to the view items
+    override func setupProperties() {
         
-        let screenWidth = screenSize.width
-        let screenHeight = screenSize.height - 40
-        let viewController = CityListViewController()
+        ///  table view properties
+        citiesTableView.tag = 1
         
-        self.backgroundColor = UIColor.white
-        
-        let tableView : UITableView = UITableView(frame: CGRect(x: 0, y: 0, width:screenWidth, height: screenHeight))
-        tableView.tag = 1
-        tableView.dataSource = viewController
-        tableView.delegate = viewController
-        self.addSubview(tableView)
-        
-        
-        let scrollButton : UIButton = UIButton(frame : CGRect(x : screenWidth - 70, y : screenHeight - 100, width: 50, height : 50))
+        ///  button properties
         scrollButton.backgroundColor = UIColor.white
         scrollButton.setImage(UIImage(named: "ic_hand_up_black"), for: .normal)
-        scrollButton.layer.cornerRadius = 25
-        scrollButton.layer.shadowRadius = 2
+        scrollButton.addCornerRadius(scrollButtonWidth/2)
+        scrollButton.layer.shadowRadius = 3
         scrollButton.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         scrollButton.layer.shadowOpacity = 0.8
         scrollButton.tag = 2
-        self.addSubview(scrollButton)
-        
     }
     
+    ///  add constraints to the view items
+    override func setupConstraints() {
+        /// tableView constraints
+        citiesTableView.fill(self)
+        
+        /// scroll button constraints
+        scrollButton.trailingAnchor.align(to: trailingAnchor, offset: scrollButtonTrailingOffset)
+        scrollButton.topAnchor.align(to: safeAreaLayoutGuide.bottomAnchor, offset: scrollButtonBottomOffset)
+        NSLayoutConstraint.activate([
+            scrollButton.widthAnchor.constraint(equalToConstant: scrollButtonWidth),
+            scrollButton.heightAnchor.constraint(equalToConstant: scrollButtonHeight),
+        ])
+        
+    }
 }

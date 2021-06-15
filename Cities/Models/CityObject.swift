@@ -7,34 +7,43 @@
 //
 
 import Foundation
-typealias JSON = [String: Any]
 
-struct CityObject {
-    var id: NSNumber
-    var name: String
-    var country: String
-    var coordinates: NSDictionary
+typealias CitiesObject = [CityObject]
+
+struct CityObject: Codable {
+    let country, name: String
+    let id: Int
+    let coord: Coord
+
+    enum CodingKeys: String, CodingKey {
+        case country, name
+        case id = "_id"
+        case coord
+    }
 }
 
+struct Coord: Codable {
+    let lon, lat: Double
+}
 
-extension CityObject{
-    init(json: JSON) {
-        
-        self.id = json["_id"] as! NSNumber
-        self.name = json["name"] as! String
-        self.country = json["country"] as! String
-        self.coordinates = json["coord"] as! NSDictionary
+// MARK: Convenience initializers
+extension CityObject {
+    init?(data: Data) {
+        guard let me = try? JSONDecoder().decode(CityObject.self, from: data) else { return nil }
+        self = me
     }
-    
-    public static func modelsFromArray(array:[[String:Any]]) -> [CityObject]
-    {
-        var models:[CityObject] = []
-        for item in array
-        {
-            models.append(CityObject.init(json: item))
-        }
-        return models
+}
+
+extension Coord {
+    init?(data: Data) {
+        guard let me = try? JSONDecoder().decode(Coord.self, from: data) else { return nil }
+        self = me
     }
-    
-   
+}
+
+extension Array where Element == CitiesObject.Element {
+    init?(data: Data) {
+        guard let me = try? JSONDecoder().decode(CitiesObject.self, from: data) else { return nil }
+        self = me
+    }
 }

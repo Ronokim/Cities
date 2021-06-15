@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52BE34D5267899330038A7FC /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BE34D4267899330038A7FC /* BaseView.swift */; };
+		52BE34D92678993F0038A7FC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BE34D82678993F0038A7FC /* BaseViewController.swift */; };
+		52BE34E026789EDA0038A7FC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BE34DF26789EDA0038A7FC /* UIView+Extensions.swift */; };
+		52BE34E426789F2D0038A7FC /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BE34E326789F2D0038A7FC /* UIViewController+Extensions.swift */; };
+		52BE34E826789F620038A7FC /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BE34E726789F620038A7FC /* UIDevice+Extensions.swift */; };
+		52BE34EC2678B0290038A7FC /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BE34EB2678B0290038A7FC /* BaseTableViewCell.swift */; };
+		52BE34F02678CCFF0038A7FC /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BE34EF2678CCFF0038A7FC /* BaseObject.swift */; };
 		D24A360D20FBD446008AC1AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A360C20FBD446008AC1AC /* AppDelegate.swift */; };
 		D24A361420FBD458008AC1AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D24A361320FBD458008AC1AC /* Assets.xcassets */; };
 		D24A361720FBD458008AC1AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24A361520FBD458008AC1AC /* LaunchScreen.storyboard */; };
@@ -36,6 +43,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		52BE34D4267899330038A7FC /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		52BE34D82678993F0038A7FC /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		52BE34DF26789EDA0038A7FC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		52BE34E326789F2D0038A7FC /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		52BE34E726789F620038A7FC /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
+		52BE34EB2678B0290038A7FC /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		52BE34EF2678CCFF0038A7FC /* BaseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseObject.swift; sourceTree = "<group>"; };
 		D24A360920FBD446008AC1AC /* Cities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24A360C20FBD446008AC1AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D24A361320FBD458008AC1AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,6 +88,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52BE34D32678990E0038A7FC /* BaseClass */ = {
+			isa = PBXGroup;
+			children = (
+				52BE34D4267899330038A7FC /* BaseView.swift */,
+				52BE34D82678993F0038A7FC /* BaseViewController.swift */,
+				52BE34EB2678B0290038A7FC /* BaseTableViewCell.swift */,
+				52BE34EF2678CCFF0038A7FC /* BaseObject.swift */,
+			);
+			path = BaseClass;
+			sourceTree = "<group>";
+		};
+		52BE34DE26789EA70038A7FC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				52BE34DF26789EDA0038A7FC /* UIView+Extensions.swift */,
+				52BE34E326789F2D0038A7FC /* UIViewController+Extensions.swift */,
+				52BE34E726789F620038A7FC /* UIDevice+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D24A360020FBD446008AC1AC = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +163,8 @@
 		D24A363120FBF54F008AC1AC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				52BE34DE26789EA70038A7FC /* Extensions */,
+				52BE34D32678990E0038A7FC /* BaseClass */,
 				D24A363320FBF560008AC1AC /* ViewControllers */,
 				D24A363220FBF557008AC1AC /* Views */,
 			);
@@ -273,13 +310,20 @@
 			files = (
 				D24A360D20FBD446008AC1AC /* AppDelegate.swift in Sources */,
 				D24A363520FBF583008AC1AC /* CityListView.swift in Sources */,
+				52BE34E426789F2D0038A7FC /* UIViewController+Extensions.swift in Sources */,
+				52BE34D92678993F0038A7FC /* BaseViewController.swift in Sources */,
 				D24A363B20FBFABD008AC1AC /* CityObject.swift in Sources */,
 				D24A364B20FD2136008AC1AC /* CityMapViewController.swift in Sources */,
 				D24A363E20FC0354008AC1AC /* CityListViewModel.swift in Sources */,
+				52BE34E026789EDA0038A7FC /* UIView+Extensions.swift in Sources */,
 				D24A363920FBF806008AC1AC /* CityTableViewCell.swift in Sources */,
 				D24A363720FBF59A008AC1AC /* CityListViewController.swift in Sources */,
+				52BE34D5267899330038A7FC /* BaseView.swift in Sources */,
 				D24A364920FD1F70008AC1AC /* CityMapView.swift in Sources */,
 				D24A364520FC171B008AC1AC /* CityActivityIndicatorView.swift in Sources */,
+				52BE34F02678CCFF0038A7FC /* BaseObject.swift in Sources */,
+				52BE34EC2678B0290038A7FC /* BaseTableViewCell.swift in Sources */,
+				52BE34E826789F620038A7FC /* UIDevice+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

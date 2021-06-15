@@ -9,8 +9,8 @@
 import Foundation
 
 struct CityListViewModel {
-    var cityArray = [CityObject]()
-    var defaultCityArray = [CityObject]()
+    var cityArray: CitiesObject?
+    var defaultCityArray: CitiesObject?
     
     //MARK: - bool var for reload UITableView
     var shouldReloadTable : Bool?  = true{
@@ -48,13 +48,9 @@ struct CityListViewModel {
         if let path =  Bundle.main.path(forResource: "cities", ofType: "json") {
             isLoading = true
             do {
-                
-                //let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options:.alwaysMapped)
                 
-                let jsonResult = try JSONSerialization.jsonObject(with: data as Data, options: .mutableLeaves)
-                
-                defaultCityArray = CityObject.modelsFromArray(array: jsonResult as! [[String : Any]])
+                self.defaultCityArray = Array.init(data: data)
                 defaultCityArray = self.sortCity()
                 cityArray = defaultCityArray
                 shouldReloadTable = true
@@ -73,13 +69,13 @@ struct CityListViewModel {
     
     
     func numberOfRowsInSection() -> Int {
-        return cityArray.count
+        return cityArray?.count ?? 0
     }
     
     
     mutating func searchCity(searchText: String){
         //Filter using higher order function filter based on prefix = searchText
-        cityArray = defaultCityArray.filter({ (key) -> Bool in
+        cityArray = defaultCityArray?.filter({ (key) -> Bool in
             key.name.localizedLowercase.hasPrefix(searchText.localizedLowercase) 
         })
         currentSearchText = searchText
@@ -90,7 +86,7 @@ struct CityListViewModel {
     
     
     mutating func sortCity() -> [CityObject]{
-        return defaultCityArray.sorted(by: { $0.name.localizedLowercase < $1.name.localizedLowercase })
+        return defaultCityArray?.sorted(by: { $0.name.localizedLowercase < $1.name.localizedLowercase }) ?? []
     }
     
 }
